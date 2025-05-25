@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personalized Meal Plan - PlateAI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/meal-plan.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav" style="padding: 0 20px;">
+            <div class="nav-brand">
+                <h2>PlateAI</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="meal-plan.html" class="active">Meal Plans</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="language-toggle">
+                    <button id="lang-en" class="lang-btn active">EN</button>
+                    <button id="lang-sw" class="lang-btn">SW</button>
+                </div>
+                <button class="btn-secondary">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title" data-en="Your Personalized Meal Plan" data-sw="Mpango Wako wa Milo wa Kibinafsi">
+                    Your Personalized Meal Plan
+                </h1>
+                <p class="page-subtitle" data-en="Tailored nutrition plan based on your preferences and goals" data-sw="Mpango wa lishe ulioandaliwa kulingana na mapendeleo na malengo yako">
+                    Tailored nutrition plan based on your preferences and goals
+                </p>
+            </div>
+
+            <!-- Daily Stats -->
+            <div class="stats-bar">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalCalories">2,150</span>
+                        <span class="stat-label" data-en="Total Calories" data-sw="Kalori Jumla">Total Calories</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="protein">95g</span>
+                        <span class="stat-label" data-en="Protein" data-sw="Protini">Protein</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="carbs">280g</span>
+                        <span class="stat-label" data-en="Carbohydrates" data-sw="Wanga">Carbohydrates</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="fat">75g</span>
+                        <span class="stat-label" data-en="Fat" data-sw="Mafuta">Fat</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="fiber">35g</span>
+                        <span class="stat-label" data-en="Fiber" data-sw="Nyuzi">Fiber</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-section">
+                <div class="date-selector">
+                    <button class="date-nav" onclick="changeDate(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="current-date" id="currentDate">Today, May 25</span>
+                    <button class="date-nav" onclick="changeDate(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-outline" onclick="generateShoppingList()" data-en="Shopping List" data-sw="Orodha ya Ununuzi">
+                        <i class="fas fa-shopping-cart"></i> Shopping List
+                    </button>
+                    <button class="btn-primary" onclick="regeneratePlan()" data-en="Generate New Plan" data-sw="Tengeneza Mpango Mpya">
+                        <i class="fas fa-refresh"></i> Generate New Plan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Meal Plan Grid -->
+            <div class="meal-plan-grid" id="mealPlanGrid">
+                <!-- Breakfast -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-sun"></i>
+                            <span data-en="Breakfast" data-sw="Kifungua Kinywa">Breakfast</span>
+                        </div>
+                        <div class="meal-time">7:00 - 9:00 AM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Oatmeal with Banana & Nuts" data-sw="Uji wa Oats na Ndizi & Njugu">Oatmeal with Banana & Nuts</div>
+                                <div class="meal-details">
+                                    <span>450 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 bowl" data-sw="Bakuli 1">1 bowl</span>
+                                    <span>•</span>
+                                    <span data-en="High Fiber" data-sw="Nyuzi Nyingi">High Fiber</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('breakfast-oatmeal')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('breakfast', 'oatmeal')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Fresh Orange Juice" data-sw="Maji ya Machungwa Safi">Fresh Orange Juice</div>
+                                <div class="meal-details">
+                                    <span>120 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 glass" data-sw="Glasi 1">1 glass</span>
+                                    <span>•</span>
+                                    <span data-en="Vitamin C" data-sw="Vitamini C">Vitamin C</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('breakfast-juice')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('breakfast', 'juice')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mid-Morning Snack -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-cookie-bite"></i>
+                            <span data-en="Mid-Morning Snack" data-sw="Vitafunio vya Asubuhi">Mid-Morning Snack</span>
+                        </div>
+                        <div class="meal-time">10:00 - 11:00 AM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Mixed Nuts & Dried Fruits" data-sw="Njugu Mchanganyiko na Matunda Kavu">Mixed Nuts & Dried Fruits</div>
+                                <div class="meal-details">
+                                    <span>200 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 handful" data-sw="Kiganja 1">1 handful</span>
+                                    <span>•</span>
+                                    <span data-en="Healthy Fats" data-sw="Mafuta Mazuri">Healthy Fats</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn replace-btn" onclick="replaceMeal('snack1', 'nuts')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lunch -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-utensils"></i>
+                            <span data-en="Lunch" data-sw="Chakula cha Mchana">Lunch</span>
+                        </div>
+                        <div class="meal-time">12:00 - 2:00 PM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Ugali with Fish & Sukuma Wiki" data-sw="Ugali na Samaki & Sukuma Wiki">Ugali with Fish & Sukuma Wiki</div>
+                                <div class="meal-details">
+                                    <span>650 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 plate" data-sw="Sahani 1">1 plate</span>
+                                    <span>•</span>
+                                    <span data-en="High Protein" data-sw="Protini Nyingi">High Protein</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('lunch-ugali')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('lunch', 'ugali')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Passion Fruit Juice" data-sw="Maji ya Passion">Passion Fruit Juice</div>
+                                <div class="meal-details">
+                                    <span>80 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 glass" data-sw="Glasi 1">1 glass</span>
+                                    <span>•</span>
+                                    <span data-en="Antioxidants" data-sw="Antioxidants">Antioxidants</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('lunch-juice')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('lunch', 'juice')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Afternoon Snack -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-apple-alt"></i>
+                            <span data-en="Afternoon Snack" data-sw="Vitafunio vya Mchana">Afternoon Snack</span>
+                        </div>
+                        <div class="meal-time">3:00 - 4:00 PM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Greek Yogurt with Berries" data-sw="Yogurt ya Kigiriki na Berries">Greek Yogurt with Berries</div>
+                                <div class="meal-details">
+                                    <span>180 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 cup" data-sw="Kikombe 1">1 cup</span>
+                                    <span>•</span>
+                                    <span data-en="High Protein" data-sw="Protini Nyingi">High Protein</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn replace-btn" onclick="replaceMeal('snack2', 'yogurt')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dinner -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-moon"></i>
+                            <span data-en="Dinner" data-sw="Chakula cha Jioni">Dinner</span>
+                        </div>
+                        <div class="meal-time">7:00 - 8:00 PM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Grilled Chicken with Vegetables" data-sw="Kuku wa Kuchoma na Mboga">Grilled Chicken with Vegetables</div>
+                                <div class="meal-details">
+                                    <span>500 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 plate" data-sw="Sahani 1">1 plate</span>
+                                    <span>•</span>
+                                    <span data-en="Low Carb" data-sw="Karabu Ndogo">Low Carb</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('dinner-chicken')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('dinner', 'chicken')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Herbal Tea" data-sw="Chai ya Mimea">Herbal Tea</div>
+                                <div class="meal-details">
+                                    <span>50 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 cup" data-sw="Kikombe 1">1 cup</span>
+                                    <span>•</span>
+                                    <span data-en="Antioxidants" data-sw="Antioxidants">Antioxidants</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn" onclick="viewRecipe('dinner-tea')" title="View Recipe">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                                <button class="action-btn replace-btn" onclick="replaceMeal('dinner', 'tea')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evening Snack -->
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-title">
+                            <i class="fas fa-bed"></i>
+                            <span data-en="Evening Snack" data-sw="Vitafunio vya Jioni">Evening Snack</span>
+                        </div>
+                        <div class="meal-time">9:00 - 10:00 PM</div>
+                    </div>
+                    <div class="meal-content">
+                        <div class="meal-item">
+                            <div class="meal-info">
+                                <div class="meal-name" data-en="Almond Milk" data-sw="Maziwa ya Almond">Almond Milk</div>
+                                <div class="meal-details">
+                                    <span>100 kcal</span>
+                                    <span>•</span>
+                                    <span data-en="1 glass" data-sw="Glasi 1">1 glass</span>
+                                    <span>•</span>
+                                    <span data-en="Calcium" data-sw="Kalsiamu">Calcium</span>
+                                </div>
+                            </div>
+                            <div class="meal-actions">
+                                <button class="action-btn replace-btn" onclick="replaceMeal('snack3', 'milk')" title="Replace">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                                <button class="action-btn" onclick="markComplete(this)" title="Mark as eaten">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping List Modal -->
+            <div class="modal" id="shoppingModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" data-en="Shopping List" data-sw="Orodha ya Ununuzi">Shopping List</h3>
+                        <button class="close-btn" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="shopping-grid">
+                        <div class="ingredient-category">
+                            <div class="category-title">
+                                <i class="fas fa-seedling"></i>
+                                <span data-en="Vegetables" data-sw="Mboga">Vegetables</span>
+                            </div>
+                            <ul class="ingredient-list">
+                                <li class="ingredient-item">
+                                    <input type="checkbox" class="ingredient-checkbox">
+                                    <span class="ingredient-name" data-en="Sukuma Wiki" data-sw="Sukuma Wiki">Sukuma Wiki</span>
+                                    <span class="ingredient-quantity">500g</span>
+                                </li>
+                                <!-- Add more ingredients -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Replacement Modal -->
+            <div class="modal" id="replacementModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" data-en="Replace Meal" data-sw="Badili Chakula">Replace Meal</h3>
+                        <button class="close-btn" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="replacement-options">
+                        <!-- Replacement options will be dynamically added -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Language Toggle
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const elementsWithTranslation = document.querySelectorAll('[data-en]');
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.id === 'lang-en' ? 'en' : 'sw';
+                langButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                elementsWithTranslation.forEach(el => {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
+                    } else {
+                        el.textContent = el.getAttribute(`data-${lang}`);
+                    }
+                });
+            });
+        });
+
+        // Date Navigation
+        let currentDate = new Date();
+        const dateElement = document.getElementById('currentDate');
+
+        function updateDateDisplay() {
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            dateElement.textContent = currentDate.toLocaleDateString('en-US', options);
+        }
+
+        function changeDate(days) {
+            currentDate.setDate(currentDate.getDate() + days);
+            updateDateDisplay();
+            // Add logic to fetch meal plan for new date
+        }
+
+        // Modal Handling
+        function generateShoppingList() {
+            document.getElementById('shoppingModal').classList.add('active');
+        }
+
+        function replaceMeal(mealType, currentMeal) {
+            const modal = document.getElementById('replacementModal');
+            modal.classList.add('active');
+            // Add logic to fetch replacement options
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => 
+                modal.classList.remove('active'));
+        }
+
+        function markComplete(button) {
+            button.closest('.meal-item').classList.toggle('completed');
+        }
+
+        // Initial setup
+        updateDateDisplay();
+    </script>
+</body>
+</html>

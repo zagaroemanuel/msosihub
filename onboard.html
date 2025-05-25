@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Preferences - PlateAI</title>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/onboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h2>PlateAI</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="meal-plan.html">Meal Plans</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="language-toggle">
+                    <button id="lang-en" class="lang-btn active">EN</button>
+                    <button id="lang-sw" class="lang-btn">SW</button>
+                </div>
+                <button class="btn-secondary">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 70%"></div>
+        </div>
+        <p class="progress-text" data-en="Step 1 of 2: Select your food preferences" data-sw="Hatua ya 1 kati ya 2: Chagua mapendeleo yako ya chakula">
+            Step 1 of 2: Select your food preferences
+        </p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="page-header">
+                <h1 data-en="What foods do you enjoy?" data-sw="Ni vyakula gani unavyofurahia?">
+                    What foods do you enjoy?
+                </h1>
+                <p data-en="Select foods you like to get personalized meal recommendations. We'll avoid suggesting foods you dislike." data-sw="Chagua vyakula unavyopenda kupata mapendekezo ya milo ya kibinafsi. Tutaepuka kupendekeza vyakula usivyopenda.">
+                    Select foods you like to get personalized meal recommendations. We'll avoid suggesting foods you dislike.
+                </p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="search-filter-section">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search foods..." 
+                           data-en-placeholder="Search foods..." 
+                           data-sw-placeholder="Tafuta vyakula..."
+                           onkeyup="searchFoods()">
+                </div>
+                
+                <div class="filter-tags">
+                    <button class="filter-tag active" data-category="all" 
+                            data-en="All Foods" data-sw="Vyakula Vyote" 
+                            onclick="filterByCategory('all')">
+                        All Foods
+                    </button>
+                    <button class="filter-tag" data-category="local" 
+                            data-en="Local Dishes" data-sw="Vyakula vya Kienyeji" 
+                            onclick="filterByCategory('local')">
+                        Local Dishes
+                    </button>
+                    <button class="filter-tag" data-category="salads" 
+                            data-en="Salads" data-sw="Saladi" 
+                            onclick="filterByCategory('salads')">
+                        Salads
+                    </button>
+                    <button class="filter-tag" data-category="smoothies" 
+                            data-en="Smoothies" data-sw="Vinywaji vitamu" 
+                            onclick="filterByCategory('smoothies')">
+                        Smoothies
+                    </button>
+                    <button class="filter-tag" data-category="proteins" 
+                            data-en="Proteins" data-sw="Protini" 
+                            onclick="filterByCategory('proteins')">
+                        Proteins
+                    </button>
+                </div>
+            </div>
+
+            <!-- Food Grid -->
+            <div class="food-grid" id="foodGrid">
+                <!-- Food Card 1 -->
+                <div class="food-card" data-category="local" data-dietary="diabetic">
+                    <img src="images/ugali-sukuma.jpg" alt="Ugali Sukuma" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Ugali & Sukuma Wiki" data-sw="Ugali na Sukuma Wiki">
+                            Ugali & Sukuma Wiki
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="Diabetic" data-sw="Kisukari">Diabetic</span>
+                            <span class="food-tag" data-en="Low-carb" data-sw="Karabu ndogo">Low-carb</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food Card 2 -->
+                <div class="food-card" data-category="salads" data-dietary="weight-loss">
+                    <img src="images/green-salad.jpg" alt="Green Salad" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Green Salad" data-sw="Saladi ya Kijani">
+                            Green Salad
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="Weight Loss" data-sw="Kupunguza Uzito">Weight Loss</span>
+                            <span class="food-tag" data-en="Vegan" data-sw="Vegan">Vegan</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more food cards following the same structure -->
+                <div class="food-card" data-category="local" data-dietary="high-protein">
+                    <img src="images/ugali-choma.jpg" alt="Ugali with Grilled beef" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Ugali with Grilled Beef" data-sw="Ugali na Nyama ya Kuchoma">
+                            Ugali with Grilled Beef
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="High Protein" data-sw="Protini ya Juu">High Protein</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="food-card" data-category="local" data-dietary="high-protein">
+                    <img src="images/chicken-curry.jpg" alt="Chicken Curry with Mashed Potatoes" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Chicken Curry with Mashed Potatoes" data-sw="Kuku wa Mchuzi na Viazi vya Kukaangwa">
+                            Chicken Curry with Mashed Potatoes
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="High Protein" data-sw="Protini ya Juu">High Protein</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grilled Fish with Vegetables -->
+                <div class="food-card" data-category="local" data-dietary="diabetic">
+                    <img src="images/grilled-fish.jpg" alt="Grilled Fish with Vegetables" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Grilled Fish with Vegetables" data-sw="Samaki wa Kuchoma na Mboga">
+                            Grilled Fish with Vegetables
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="Diabetic" data-sw="Kisukari">Diabetic</span>
+                            <span class="food-tag" data-en="Low-carb" data-sw="Karabu ndogo">Low-carb</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab btn-primary" onclick="location.href='onboard2.html'" 
+                data-en="Continue" data-sw="Endelea">
+            Continue <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <script>
+        // Language Toggle (Same as index.html)
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const elementsWithTranslation = document.querySelectorAll('[data-en]');
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.id === 'lang-en' ? 'en' : 'sw';
+                
+                langButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                elementsWithTranslation.forEach(el => {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = el.getAttribute(`data-${lang}-placeholder`) || el.getAttribute(`data-${lang}`);
+                    } else {
+                        el.textContent = el.getAttribute(`data-${lang}`);
+                    }
+                });
+            });
+        });
+
+        // Food Filtering Functions
+        function filterByCategory(category) {
+            document.querySelectorAll('.filter-tag').forEach(btn => 
+                btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.food-card').forEach(card => {
+                card.style.display = category === 'all' || 
+                    card.dataset.category === category ? 'block' : 'none';
+            });
+        }
+
+        function searchFoods() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.food-card').forEach(card => {
+                const title = card.querySelector('.food-title').textContent.toLowerCase();
+                card.style.display = title.includes(input) ? 'block' : 'none';
+            });
+        }
+
+        // Like/Dislike Toggle
+        function togglePreference(button) {
+            const card = button.closest('.food-card');
+            const isLike = button.classList.contains('like-btn');
+            
+            card.classList.remove('liked', 'disliked');
+            if (isLike) {
+                card.classList.add('liked');
+                button.disabled = true;
+                card.querySelector('.dislike-btn').disabled = false;
+            } else {
+                card.classList.add('disliked');
+                button.disabled = true;
+                card.querySelector('.like-btn').disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

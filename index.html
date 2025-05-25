@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlateAI - Personalized Meals Made Easy</title>
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" style="padding: 0 20px;">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h2>PlateAI</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="recipe.html">Recipes</a>
+                <a href="meal-plan.html">Meal Plans</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="language-toggle">
+                    <button id="lang-en" class="lang-btn active">EN</button>
+                    <button id="lang-sw" class="lang-btn">SW</button>
+                </div>
+                <button class="btn-secondary">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-en="Personalized meals made easy." data-sw="Milo ya kibinafsi kwa urahisi.">
+                    Personalized meals made easy.
+                </h1>
+                <p class="hero-subtitle" data-en="PlateAI advises what to eat based on your body's needs, using foods available locally." data-sw="PlateAI inashauri nini cha kula kulingana na mahitaji ya mwili wako, kwa kutumia vyakula vinavyopatikana ulipo.">
+                    PlateAI advises what to eat based on your body's needs, using foods available locally.
+                </p>
+                <button class="btn-primary cta-btn" onclick="location.href='onboard.html'" data-en="Get Started" data-sw="Anza">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Strip -->
+    <section class="info-strip">
+        <div class="container">
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3 data-en="Real Quick" data-sw="Mipango ya Haraka">
+                        Real Quick Meal Planning
+                    </h3>
+                    <p data-en="Personalized meal in 2 minutes - Forget long day of planning what to eat." data-sw="Mlo wa kibinafsi kwa dakika 2 - Sahau siku ndefu za kupanga chakula.">
+                        Personalized meal in 2 minutes - Forget long day of planning what to eat.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3 data-en="Experts Support" data-sw="Msaada wa Wataalamu">
+                        Experts Support
+                    </h3>
+                    <p data-en="Support from Nutrition Experts - Access support from certified nutritionist and dietitians." data-sw="Msaada kutoka kwa Wataalamu wa Lishe - Pata msaada kutoka kwa wataalamu wa lishe waliosajiliwa.">
+                        Support from Nutrition Experts - Access support from certified nutritionist and dietitians.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-fire"></i>
+                    <h3 data-en="Healthy Food as Business" data-sw="Fanya Biashara Chakula Nasi">
+                        Healthy Food as Business
+                    </h3>
+                    <p data-en="Healthy Food as Business for Vendors - You can use PlateAI easy to follow guide to start healthy food business in Dar es Salaam." data-sw="Chakula Chenye Afya kama Biashara - Unaweza kutumia mwongozo wa PlateAI kuanza biashara ya chakula chenye afya Dar es Salaam.">
+                        Healthy Food as Business for Vendors - You can use PlateAI easy to follow guide to start healthy food business in Dar es Salaam.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Need Guidance Section -->
+    <section class="guidance-section">
+        <div class="container">
+            <h2 class="section-title" data-en="Need Guidance?" data-sw="Unahitaji Mwongozo?">Need Guidance?</h2>
+            <div class="guidance-cards">
+                <!-- Callback Form -->
+                <div class="guidance-card">
+                    <h3 data-en="Request a Callback" data-sw="Omba Kupigwa Simu">Request a Callback</h3>
+                    <form class="callback-form">
+                        <input type="text" placeholder="Your Name" data-en-placeholder="Your Name" data-sw-placeholder="Jina Lako" required>
+                        <select required>
+                            <option value="" data-en="How can we help you?" data-sw="Tunawezaje kukusaidia?">How can we help you?</option>
+                            <option value="ncds" data-en="Battling NCDs" data-sw="Kupambana na Magonjwa Yasiyo ya Maambukizi">Battling NCDs</option>
+                            <option value="weight-loss" data-en="Lose Weight" data-sw="Kupunguza Uzito">Lose Weight</option>
+                            <option value="maintain" data-en="Maintain" data-sw="Kudumisha">Maintain</option>
+                        </select>
+                        <button type="button" class="btn-primary" onclick="requestCallback()" data-en="Request Callback" data-sw="Omba Kupigwa Simu">
+                            Request Callback
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Prepaid Meal Order -->
+                <div class="guidance-card">
+                    <h3 data-en="Prepaid Meal Order" data-sw="Malipo ya Milo ya Awali">Prepaid Meal Order</h3>
+                    <form class="meal-order-form">
+                        <select id="location" onchange="handleLocationChange()" required>
+                            <option value="" data-en="Where are you found?" data-sw="Unapatikana wapi?">Where are you found?</option>
+                            <option value="dar" data-en="Dar es Salaam" data-sw="Dar es Salaam">Dar es Salaam</option>
+                            <option value="other" data-en="Other regions" data-sw="Mikoa mingine">Other regions</option>
+                        </select>
+                        
+                        <div id="district-select" class="hidden">
+                            <select>
+                                <option value="">Select District</option>
+                                <option value="kinondoni">Kinondoni</option>
+                                <option value="ubungo">Ubungo</option>
+                                <option value="ilala">Ilala</option>
+                                <option value="temeke">Temeke</option>
+                                <option value="kigamboni">Kigamboni</option>
+                            </select>
+                        </div>
+                        
+                        <div id="address-input" class="hidden">
+                            <input type="text" placeholder="Specify your address" data-en-placeholder="Specify your address" data-sw-placeholder="Bainisha anwani yako">
+                        </div>
+                        
+                        <input type="number" placeholder="Budget per week (TZS)" data-en-placeholder="Budget per week (TZS)" data-sw-placeholder="Bajeti kwa wiki (TZS)" required>
+                        
+                        <div class="user-details">
+                            <input type="number" placeholder="Age" data-en-placeholder="Age" data-sw-placeholder="Umri" required>
+                            <select required>
+                                <option value="" data-en="Sex" data-sw="Jinsia">Sex</option>
+                                <option value="male" data-en="Male" data-sw="Mume">Male</option>
+                                <option value="female" data-en="Female" data-sw="Mke">Female</option>
+                            </select>
+                            <input type="number" placeholder="Height (cm)" data-en-placeholder="Height (cm)" data-sw-placeholder="Urefu (cm)" required>
+                            <input type="number" placeholder="Weight (kg)" data-en-placeholder="Weight (kg)" data-sw-placeholder="Uzito (kg)" required>
+                            <select required>
+                                <option value="" data-en="Activity Level" data-sw="Kiwango cha Shughuli">Activity Level</option>
+                                <option value="low" data-en="Low" data-sw="Chini">Low</option>
+                                <option value="moderate" data-en="Moderate" data-sw="Wastani">Moderate</option>
+                                <option value="high" data-en="High" data-sw="Juu">High</option>
+                            </select>
+                            <select required>
+                                <option value="" data-en="Dietary Goal" data-sw="Lengo la Lishe">Dietary Goal</option>
+                                <option value="weight-loss" data-en="Weight Loss" data-sw="Kupunguza Uzito">Weight Loss</option>
+                                <option value="weight-gain" data-en="Weight Gain" data-sw="Kuongeza Uzito">Weight Gain</option>
+                                <option value="maintain" data-en="Maintain" data-sw="Kudumisha">Maintain</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-secondary" data-en="Order & Pay" data-sw="Agiza na Lipa">
+                            Order & Pay
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Plans Section -->
+    <section class="sample-plans">
+        <div class="container">
+            <div class="plans-content">
+                <div class="plans-info">
+                    <h2 data-en="Find Balance - with flexibility" data-sw="Pata Uwiano - kwa kubadilika">Find Balance - with flexibility</h2>
+                    <p data-en="Meet your dietary needs with our meal plans/package measured to suit your need and fit your preferences. We'll recommend food from 300+ meals easily available." data-sw="Timiza mahitaji yako ya lishe na mipango yetu ya milo iliyopimwa kukidhi mahitaji yako na kuendana na mapendeleo yako. Tutapendekeza chakula kutoka kwa milo 300+ zinazopotikana kwa urahisi.">
+                        Meet your dietary needs with our meal plans/package measured to suit your need and fit your preferences. We'll recommend food from 300+ meals easily available.
+                    </p>
+                    <button class="btn-primary" onclick="location.href='onboard.html'" data-en="Get Started →" data-sw="Anza →">
+                        Get Started →
+                    </button>
+                </div>
+                <div class="meal-cards">
+                    <div class="meal-card">
+                        <h4 data-en="Breakfast" data-sw="Kifungua Kinywa">Breakfast</h4>
+                        <p class="meal-name" data-en="Oatmeal with Fruits" data-sw="Uji wa Oats na Matunda">Oatmeal with Fruits</p>
+                        <p class="serving-size" data-en="Serving: 1 bowl" data-sw="Kiwango: Bakuli 1">Serving: 1 bowl</p>
+                        <button class="btn-change" data-en="Change" data-sw="Badili">Change</button>
+                    </div>
+                    <div class="meal-card">
+                        <h4 data-en="Lunch" data-sw="Chakula cha Mchana">Lunch</h4>
+                        <p class="meal-name" data-en="Ugali with Fish & Vegetables" data-sw="Ugali na Samaki & Mboga">Ugali with Fish & Vegetables</p>
+                        <p class="serving-size" data-en="Serving: 1 plate" data-sw="Kiwango: Sahani 1">Serving: 1 plate</p>
+                        <button class="btn-change" data-en="Change" data-sw="Badili">Change</button>
+                    </div>
+                    <div class="meal-card">
+                        <h4 data-en="Snack" data-sw="Vitafunio">Snack</h4>
+                        <p class="meal-name" data-en="Mixed Nuts" data-sw="Njugu Mchanganyiko">Mixed Nuts</p>
+                        <p class="serving-size" data-en="Serving: 1 handful" data-sw="Kiwango: Kiganja 1">Serving: 1 handful</p>
+                        <button class="btn-change" data-en="Change" data-sw="Badili">Change</button>
+                    </div>
+                    <div class="meal-card">
+                        <h4 data-en="Dinner" data-sw="Chakula cha Jioni">Dinner</h4>
+                        <p class="meal-name" data-en="Rice with Beans & Spinach" data-sw="Wali na Maharage & Mchicha">Rice with Beans & Spinach</p>
+                        <p class="serving-size" data-en="Serving: 1 plate" data-sw="Kiwango: Sahani 1">Serving: 1 plate</p>
+                        <button class="btn-change" data-en="Change" data-sw="Badili">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title" data-en="How It Works" data-sw="Jinsi Inavyofanya Kazi">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 data-en="Select preferred foods" data-sw="Chagua vyakula unavyopenda">Select preferred foods</h3>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 data-en="Share your data" data-sw="Shiriki data yako">Share your data</h3>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 data-en="Get personalized plan" data-sw="Pata mpango wa kibinafsi">Get personalized plan</h3>
+                </div>
+            </div>
+            <div class="cta-center">
+                <button class="btn-primary" onclick="location.href='onboard.html'" data-en="Select Foods You Like" data-sw="Chagua Vyakula Unavyopenda">
+                    Select Foods You Like
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>PlateAI</h3>
+                    <p data-en="Personalized nutrition made simple" data-sw="Lishe ya kibinafsi kwa urahisi">Personalized nutrition made simple</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Quick Links" data-sw="Viungo vya Haraka">Quick Links</h4>
+                    <a href="index.html" data-en="Home" data-sw="Nyumbani">Home</a>
+                    <a href="meal-plan.html" data-en="Meal Plans" data-sw="Mipango ya Milo">Meal Plans</a>
+                    <a href="onboard.html" data-en="Get Started" data-sw="Anza">Get Started</a>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Contact" data-sw="Mawasiliano">Contact</h4>
+                    <p>info@plateai.app</p>
+                    <p>+255 622 387 189</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Toggle Functionality
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const elementsWithTranslation = document.querySelectorAll('[data-en]');
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.id === 'lang-en' ? 'en' : 'sw';
+                
+                // Update active button
+                langButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Update text content
+                elementsWithTranslation.forEach(el => {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = el.getAttribute(`data-${lang}-placeholder`) || el.getAttribute(`data-${lang}`);
+                    } else {
+                        el.textContent = el.getAttribute(`data-${lang}`);
+                    }
+                });
+            });
+        });
+
+        // Location Change Handler
+        function handleLocationChange() {
+            const location = document.getElementById('location').value;
+            const districtSelect = document.getElementById('district-select');
+            const addressInput = document.getElementById('address-input');
+
+            if (location === 'dar') {
+                districtSelect.classList.remove('hidden');
+                addressInput.classList.add('hidden');
+            } else if (location === 'other') {
+                districtSelect.classList.add('hidden');
+                addressInput.classList.remove('hidden');
+            } else {
+                districtSelect.classList.add('hidden');
+                addressInput.classList.add('hidden');
+            }
+        }
+
+        // Request Callback Function
+        function requestCallback() {
+            const name = document.querySelector('.callback-form input[type="text"]').value;
+            const issue = document.querySelector('.callback-form select').value;
+            
+            if (!name || !issue) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const message = `Hello PlateAI! My name is ${name} and I need help with ${issue}. Please call me back.`;
+            const whatsappUrl = `https://wa.me/255622387189?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

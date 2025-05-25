@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head content as meal-plan.html -->
+    <title>Nutrition Summary - PlateAI</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/summary.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Same header as meal-plan.html -->
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title" data-en="Nutrition Summary" data-sw="Muhtasari wa Lishe">
+                    Nutrition Summary
+                </h1>
+            </div>
+
+            <div class="summary-grid">
+                <!-- Weekly Progress Chart -->
+                <div class="summary-card chart-card">
+                    <h3 data-en="Weekly Progress" data-sw="Maendeleo ya Wiki">Weekly Progress</h3>
+                    <div class="chart-container">
+                        <!-- Add chart using Chart.js or similar -->
+                    </div>
+                </div>
+
+                <!-- Macronutrient Distribution -->
+                <div class="summary-card">
+                    <h3 data-en="Macronutrients" data-sw="Virutubishi Vikubwa">Macronutrients</h3>
+                    <div class="macronutrient-grid">
+                        <div class="macro-item protein">
+                            <span class="macro-value">95g</span>
+                            <span class="macro-label">Protein</span>
+                        </div>
+                        <!-- Add Carbs and Fat sections -->
+                    </div>
+                </div>
+
+                <!-- Meal Compliance -->
+                <div class="summary-card">
+                    <h3 data-en="Meal Compliance" data-sw="Utekelezaji wa Milo">Meal Compliance</h3>
+                    <div class="compliance-meter">
+                        <div class="progress-circle" style="--progress: 75%">
+                            <span class="progress-value">75%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Water Intake -->
+                <div class="summary-card">
+                    <h3 data-en="Water Intake" data-sw="Kunywaji Maji">Water Intake</h3>
+                    <div class="water-tracker">
+                        <div class="water-bottle">
+                            <div class="fill" style="height: 60%"></div>
+                        </div>
+                        <span class="water-amount">2.4L / 3L</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Same footer as meal-plan.html -->
+    <!-- Same scripts as meal-plan.html -->
+</body>
+</html>
