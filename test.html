@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prepaid Meal Order</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .guidance-card {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Prepaid Meal Order -->
+    <div class="guidance-card">
+        <h3 data-en="Prepaid Meal Order" data-sw="Malipo ya Milo ya Awali">Prepaid Meal Order</h3>
+        <form class="meal-order-form">
+            <select id="location" onchange="handleLocationChange()" required>
+                <option value="" data-en="Where are you found?" data-sw="Unapatikana wapi?">Where are you found?</option>
+                <option value="dar">Dar es Salaam</option>
+                <option value="other">Other regions</option>
+            </select>
+            
+            <div id="district-select" class="hidden">
+                <select id="district">
+                    <option value="">Select District</option>
+                    <option value="kinondoni">Kinondoni</option>
+                    <option value="ubungo">Ubungo</option>
+                    <option value="ilala">Ilala</option>
+                    <option value="temeke">Temeke</option>
+                    <option value="kigamboni">Kigamboni</option>
+                </select>
+            </div>
+            
+            <div id="address-input" class="hidden">
+                <input type="text" id="address" placeholder="Specify your address">
+            </div>
+            
+            <input type="number" id="budget" placeholder="Budget per week (TZS)" required>
+            
+            <div class="user-details">
+                <input type="number" id="age" placeholder="Age" required>
+                
+                <select id="sex" required>
+                    <option value="">Sex</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <input type="number" id="height" placeholder="Height (cm)" required>
+                <input type="number" id="weight" placeholder="Weight (kg)" required>
+
+                <select id="activity_level" required>
+                    <option value="">Activity Level</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+
+                <select id="dietary_goal" required>
+                    <option value="">Dietary Goal</option>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="muscle_gain">Weight Gain</option>
+                    <option value="maintain_weight">Maintain Weight</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-secondary">Order & Pay</button>
+        </form>
+    </div>
+
+    <script>
+        function handleLocationChange() {
+            const location = document.getElementById('location').value;
+            const districtSelect = document.getElementById('district-select');
+            const addressInput = document.getElementById('address-input');
+
+            if (location === 'dar') {
+                districtSelect.classList.remove('hidden');
+                addressInput.classList.remove('hidden');
+            } else {
+                districtSelect.classList.add('hidden');
+                addressInput.classList.remove('hidden');
+            }
+        }
+
+        document.querySelector('.meal-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const location = document.getElementById('location').value;
+            const district = location === 'dar' ? document.getElementById('district').value : '';
+            const address = document.getElementById('address').value;
+            const budget = document.getElementById('budget').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const activity_level = document.getElementById('activity_level').value;
+            const dietary_goal = document.getElementById('dietary_goal').value;
+
+            // Validation check for common user error
+            const invalidGoals = ['kinondoni', 'ilala', 'ubungo', 'temeke', 'kigamboni'];
+            if (invalidGoals.includes(dietary_goal.toLowerCase())) {
+                alert("Please select a valid dietary goal.");
+                return;
+            }
+
+            const formData = {
+                location,
+                district,
+                address,
+                budget,
+                age,
+                sex,
+                height,
+                weight,
+                activity_level,
+                dietary_goal
+            };
+
+            const jsonOutput = JSON.stringify(formData, null, 4);
+            console.log(jsonOutput);
+
+            const message = `Meal Order Details:\n${jsonOutput}`;
+            const whatsappUrl = `https://wa.me/255622387189?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+</body>
+</html>

@@ -97,7 +97,7 @@
             <div class="food-grid" id="foodGrid">
                 <!-- Food Card 1 -->
                 <div class="food-card" data-category="local" data-dietary="diabetic">
-                    <img src="images/ugali-sukuma.jpg" alt="Ugali Sukuma" class="food-image">
+                    <img src="images/food/ugali-sukuma.jpg" alt="Ugali Sukuma" class="food-image">
                     <div class="food-details">
                         <h3 class="food-title" data-en="Ugali & Sukuma Wiki" data-sw="Ugali na Sukuma Wiki">
                             Ugali & Sukuma Wiki
@@ -124,7 +124,7 @@
 
                 <!-- Food Card 2 -->
                 <div class="food-card" data-category="salads" data-dietary="weight-loss">
-                    <img src="images/green-salad.jpg" alt="Green Salad" class="food-image">
+                    <img src="images/food/green-salad.jpg" alt="Green Salad" class="food-image">
                     <div class="food-details">
                         <h3 class="food-title" data-en="Green Salad" data-sw="Saladi ya Kijani">
                             Green Salad
@@ -151,7 +151,7 @@
 
                 <!-- Add more food cards following the same structure -->
                 <div class="food-card" data-category="local" data-dietary="high-protein">
-                    <img src="images/ugali-choma.jpg" alt="Ugali with Grilled beef" class="food-image">
+                    <img src="images/food/chakula.jpg" alt="Ugali with Grilled beef" class="food-image">
                     <div class="food-details">
                         <h3 class="food-title" data-en="Ugali with Grilled Beef" data-sw="Ugali na Nyama ya Kuchoma">
                             Ugali with Grilled Beef
@@ -178,7 +178,7 @@
 
 
                 <div class="food-card" data-category="local" data-dietary="high-protein">
-                    <img src="images/chicken-curry.jpg" alt="Chicken Curry with Mashed Potatoes" class="food-image">
+                    <img src="images/food/chicken-curry-mashed.jpg" alt="Chicken Curry with Mashed Potatoes" class="food-image">
                     <div class="food-details">
                         <h3 class="food-title" data-en="Chicken Curry with Mashed Potatoes" data-sw="Kuku wa Mchuzi na Viazi vya Kukaangwa">
                             Chicken Curry with Mashed Potatoes
@@ -203,7 +203,7 @@
                 </div>
                 <!-- Grilled Fish with Vegetables -->
                 <div class="food-card" data-category="local" data-dietary="diabetic">
-                    <img src="images/grilled-fish.jpg" alt="Grilled Fish with Vegetables" class="food-image">
+                    <img src="images/food/Grilled-fish-and-vege-rice.jpg" alt="Grilled Fish with Vegetables" class="food-image">
                     <div class="food-details">
                         <h3 class="food-title" data-en="Grilled Fish with Vegetables" data-sw="Samaki wa Kuchoma na Mboga">
                             Grilled Fish with Vegetables
@@ -211,6 +211,83 @@
                         <div class="food-tags">
                             <span class="food-tag" data-en="Diabetic" data-sw="Kisukari">Diabetic</span>
                             <span class="food-tag" data-en="Low-carb" data-sw="Karabu ndogo">Low-carb</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add a smoothie -->
+                <div class="food-card" data-category="smoothies" data-dietary="weight-loss">
+                    <img src="images/food/banana-smoothie.jpg" alt="Banana Smoothie" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Banana Smoothie" data-sw="Smoothie ya Ndizi">
+                            Banana Smoothie
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="Weight Loss" data-sw="Kupunguza Uzito">Weight Loss</span>
+                            <span class="food-tag" data-en="Vegan" data-sw="Vegan">Vegan</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Milk avocado smoothie -->
+                <div class="food-card" data-category="smoothies" data-dietary="high-protein">
+                    <img src="images/food/milk-avocado-smoothie.jpg" alt="Milk Avocado Smoothie" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Milk Avocado Smoothie" data-sw="Smoothie ya Parachichi na Maziwa">
+                            Milk Avocado Smoothie
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="High Protein" data-sw="Protini ya Juu">High Protein</span>
+                        </div>
+                        <div class="food-actions">
+                            <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">
+                                View Recipe
+                            </a>
+                            <div class="action-buttons">
+                                <button class="dislike-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                                <button class="like-btn" onclick="togglePreference(this)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add high protein food -->
+                <div class="food-card" data-category="proteins" data-dietary="high-protein">
+                    <img src="images/food/Grilled-chicken-breast.jpg" alt="Grilled Chicken Breast" class="food-image">
+                    <div class="food-details">
+                        <h3 class="food-title" data-en="Grilled Chicken Breast" data-sw="Kifua cha Kuku Kichoma">
+                            Grilled Chicken Breast
+                        </h3>
+                        <div class="food-tags">
+                            <span class="food-tag" data-en="High Protein" data-sw="Protini ya Juu">High Protein</span>
                         </div>
                         <div class="food-actions">
                             <a href="#" class="recipe-link" data-en="View Recipe" data-sw="Tazama Mapishi">

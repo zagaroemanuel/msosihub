@@ -13,11 +13,13 @@
     <header class="header" style="padding: 0 20px;">
         <nav class="nav">
             <div class="nav-brand">
-                <h2>PlateAI</h2>
+                <span style="display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: bold;">
+                    <img src="images/favIcon.png" alt="favIcon" style="height: 32px; margin-right: 10px;">PlateAI</span>
+                </span>
             </div>
             <div class="nav-links">
                 <a href="index.html" class="active">Home</a>
-                <a href="recipe.html">Recipes</a>
+                <a href="recipes.html">Recipes</a>
                 <a href="meal-plan.html">Meal Plans</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -33,19 +35,23 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title" data-en="Personalized meals made easy." data-sw="Milo ya kibinafsi kwa urahisi.">
-                    Personalized meals made easy.
-                </h1>
-                <p class="hero-subtitle" data-en="PlateAI advises what to eat based on your body's needs, using foods available locally." data-sw="PlateAI inashauri nini cha kula kulingana na mahitaji ya mwili wako, kwa kutumia vyakula vinavyopatikana ulipo.">
-                    PlateAI advises what to eat based on your body's needs, using foods available locally.
-                </p>
-                <button class="btn-primary cta-btn" onclick="location.href='onboard.html'" data-en="Get Started" data-sw="Anza">
-                    Get Started
-                </button>
+        <div class="container hero-bg" style="background: url('images/herobanner.jpg') center center/cover no-repeat; border-radius: 16px; min-height: 340px; display: flex; align-items: center;">
+            <div class="hero-content" style="background: rgba(16, 16, 16, 0.8); border-radius: 12px; flex: 1; max-width: 100%; height: 100%;">
+                <div style="padding: 66px 64px;">
+                    <h1 class="hero-title" data-en="Personalized meals made easy." data-sw="Milo ya kibinafsi kwa urahisi.">
+                        Personalized meals made easy.
+                    </h1>
+                    <p class="hero-subtitle" data-en="PlateAI advises what to eat based on your body's needs, using foods available locally." data-sw="PlateAI inashauri nini cha kula kulingana na mahitaji ya mwili wako, kwa kutumia vyakula vinavyopatikana ulipo.">
+                        PlateAI advises what to eat based on your body's needs, using foods available locally.
+                    </p>
+                    <button class="btn-primary cta-btn" onclick="location.href='onboard.html'" data-en="Get Started" data-sw="Anza">
+                        Get Started
+                    </button>
+                </div>
             </div>
         </div>
+
+
     </section>
 
     <!-- Info Strip -->
@@ -95,10 +101,12 @@
                         <input type="text" placeholder="Your Name" data-en-placeholder="Your Name" data-sw-placeholder="Jina Lako" required>
                         <select required>
                             <option value="" data-en="How can we help you?" data-sw="Tunawezaje kukusaidia?">How can we help you?</option>
-                            <option value="ncds" data-en="Battling NCDs" data-sw="Kupambana na Magonjwa Yasiyo ya Maambukizi">Battling NCDs</option>
+                            <option value="Battling non communicable diseases" data-en="Battling NCDs" data-sw="Kupambana na Magonjwa Yasiyo ya Maambukizi">Battling NCDs</option>
                             <option value="weight-loss" data-en="Lose Weight" data-sw="Kupunguza Uzito">Lose Weight</option>
                             <option value="maintain" data-en="Maintain" data-sw="Kudumisha">Maintain</option>
                         </select>
+                        <!-- When selected ask to specify (optional) -->
+                        <input type="text" placeholder="Specify your issue (optional)" data-en-placeholder="Specify your issue (optional)" data-sw-placeholder="Bainisha tatizo lako (hiari)">
                         <button type="button" class="btn-primary" onclick="requestCallback()" data-en="Request Callback" data-sw="Omba Kupigwa Simu">
                             Request Callback
                         </button>
@@ -111,12 +119,12 @@
                     <form class="meal-order-form">
                         <select id="location" onchange="handleLocationChange()" required>
                             <option value="" data-en="Where are you found?" data-sw="Unapatikana wapi?">Where are you found?</option>
-                            <option value="dar" data-en="Dar es Salaam" data-sw="Dar es Salaam">Dar es Salaam</option>
-                            <option value="other" data-en="Other regions" data-sw="Mikoa mingine">Other regions</option>
+                            <option value="dar">Dar es Salaam</option>
+                            <option value="other">Other regions</option>
                         </select>
                         
                         <div id="district-select" class="hidden">
-                            <select>
+                            <select id="district">
                                 <option value="">Select District</option>
                                 <option value="kinondoni">Kinondoni</option>
                                 <option value="ubungo">Ubungo</option>
@@ -127,37 +135,39 @@
                         </div>
                         
                         <div id="address-input" class="hidden">
-                            <input type="text" placeholder="Specify your address" data-en-placeholder="Specify your address" data-sw-placeholder="Bainisha anwani yako">
+                            <input type="text" id="address" placeholder="Specify your address">
                         </div>
                         
-                        <input type="number" placeholder="Budget per week (TZS)" data-en-placeholder="Budget per week (TZS)" data-sw-placeholder="Bajeti kwa wiki (TZS)" required>
+                        <input type="number" id="budget" placeholder="Budget per week (TZS)" required>
                         
                         <div class="user-details">
-                            <input type="number" placeholder="Age" data-en-placeholder="Age" data-sw-placeholder="Umri" required>
-                            <select required>
-                                <option value="" data-en="Sex" data-sw="Jinsia">Sex</option>
-                                <option value="male" data-en="Male" data-sw="Mume">Male</option>
-                                <option value="female" data-en="Female" data-sw="Mke">Female</option>
+                            <input type="number" id="age" placeholder="Age" required>
+                            
+                            <select id="sex" required>
+                                <option value="">Sex</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
                             </select>
-                            <input type="number" placeholder="Height (cm)" data-en-placeholder="Height (cm)" data-sw-placeholder="Urefu (cm)" required>
-                            <input type="number" placeholder="Weight (kg)" data-en-placeholder="Weight (kg)" data-sw-placeholder="Uzito (kg)" required>
-                            <select required>
-                                <option value="" data-en="Activity Level" data-sw="Kiwango cha Shughuli">Activity Level</option>
-                                <option value="low" data-en="Low" data-sw="Chini">Low</option>
-                                <option value="moderate" data-en="Moderate" data-sw="Wastani">Moderate</option>
-                                <option value="high" data-en="High" data-sw="Juu">High</option>
+
+                            <input type="number" id="height" placeholder="Height (cm)" required>
+                            <input type="number" id="weight" placeholder="Weight (kg)" required>
+
+                            <select id="activity_level" required>
+                                <option value="">Activity Level</option>
+                                <option value="low">Low</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="high">High</option>
                             </select>
-                            <select required>
-                                <option value="" data-en="Dietary Goal" data-sw="Lengo la Lishe">Dietary Goal</option>
-                                <option value="weight-loss" data-en="Weight Loss" data-sw="Kupunguza Uzito">Weight Loss</option>
-                                <option value="weight-gain" data-en="Weight Gain" data-sw="Kuongeza Uzito">Weight Gain</option>
-                                <option value="maintain" data-en="Maintain" data-sw="Kudumisha">Maintain</option>
+
+                            <select id="dietary_goal" required>
+                                <option value="">Dietary Goal</option>
+                                <option value="weight_loss">Weight Loss</option>
+                                <option value="muscle_gain">Weight Gain</option>
+                                <option value="maintain_weight">Maintain Weight</option>
                             </select>
                         </div>
                         
-                        <button type="submit" class="btn-secondary" data-en="Order & Pay" data-sw="Agiza na Lipa">
-                            Order & Pay
-                        </button>
+                        <button type="submit" class="btn-secondary">Order & Pay</button>
                     </form>
                 </div>
             </div>
@@ -306,18 +316,82 @@
 
         // Request Callback Function
         function requestCallback() {
-            const name = document.querySelector('.callback-form input[type="text"]').value;
+            const inputs = document.querySelectorAll('.callback-form input[type="text"]');
+            const name = inputs[0].value.trim();
+            const specify = inputs[1].value.trim(); // second input is for 'specify'
             const issue = document.querySelector('.callback-form select').value;
-            
+
             if (!name || !issue) {
-                alert('Please fill in all fields');
+                alert('Please fill in all required fields');
                 return;
             }
-            
-            const message = `Hello PlateAI! My name is ${name} and I need help with ${issue}. Please call me back.`;
+
+            let message = `Hello PlateAI! My name is ${name} and I need help with ${issue}.`;
+            if (specify) {
+                message += ` Specifically, ${specify}.`;
+            }
+            message += ` Please call me back.`;
+
             const whatsappUrl = `https://wa.me/255622387189?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
+
+        // Handle form submission for meal order
+        function handleLocationChange() {
+            const location = document.getElementById('location').value;
+            const districtSelect = document.getElementById('district-select');
+            const addressInput = document.getElementById('address-input');
+
+            if (location === 'dar') {
+                districtSelect.classList.remove('hidden');
+                addressInput.classList.remove('hidden');
+            } else {
+                districtSelect.classList.add('hidden');
+                addressInput.classList.remove('hidden');
+            }
+        }
+
+        document.querySelector('.meal-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const location = document.getElementById('location').value;
+            const district = location === 'dar' ? document.getElementById('district').value : '';
+            const address = document.getElementById('address').value;
+            const budget = document.getElementById('budget').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const activity_level = document.getElementById('activity_level').value;
+            const dietary_goal = document.getElementById('dietary_goal').value;
+
+            // Validation check for common user error
+            const invalidGoals = ['kinondoni', 'ilala', 'ubungo', 'temeke', 'kigamboni'];
+            if (invalidGoals.includes(dietary_goal.toLowerCase())) {
+                alert("Please select a valid dietary goal.");
+                return;
+            }
+
+            const formData = {
+                location,
+                district,
+                address,
+                budget,
+                age,
+                sex,
+                height,
+                weight,
+                activity_level,
+                dietary_goal
+            };
+
+            const jsonOutput = JSON.stringify(formData, null, 4);
+            console.log(jsonOutput);
+
+            const message = `Meal Order Details:\n${jsonOutput}`;
+            const whatsappUrl = `https://wa.me/255622387189?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
     </script>
 </body>
 </html>
